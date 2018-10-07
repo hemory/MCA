@@ -13,6 +13,7 @@ namespace MovieCapstone
 
             var movieMenu = new Menu();
             movieMenu.ShowMenu();
+
             var choice = Convert.ToInt32(Console.ReadLine());
             movieMenu.MakeChoice(choice);
         }
@@ -22,7 +23,6 @@ namespace MovieCapstone
     #region MOVIECLASS
     public class Movie
     {
-        public int ID { get; set; }
         public string Title { get; set; }
         public string Actor { get; set; }
         public string Genre { get; set; }
@@ -34,13 +34,13 @@ namespace MovieCapstone
 
             List<Movie> MovieList = new List<Movie>
             {
-                new Movie { ID = 1, Title = "THE GREEN MILE", Actor = "GUAM HERNANDEZ", Genre = "FUNNY", Director = "Juan" },
-                new Movie { ID = 2, Title = "MEN IN BLACK", Actor = "WILL SMITH", Genre = "SAD", Director = "Juan" },
-                new Movie { ID = 3, Title = "GHOST", Actor = "PATRICK SWAYZE", Genre = "COMEDY", Director = "Juan" },
-                new Movie { ID = 4, Title = "FAST AND FURIOUS", Actor = "VIN DIESEL", Genre = "DARK", Director = "Juan" },
-                new Movie { ID = 5, Title = "THE NOTEBOOK", Actor = "RYAN GOSLING", Genre = "ACTION", Director = "Juan" },
-                new Movie { ID = 6, Title = "JAWS", Actor = "GABRIEL UNION", Genre = "ROMANCE", Director = "Juan" },
-                new Movie { ID = 7, Title = "TITANIC", Actor = "LEO DECRAPIO", Genre = "CRYBABY", Director = "Juan" }
+                new Movie { Title = "THE GREEN MILE", Actor = "GUAM HERNANDEZ", Genre = "FUNNY", Director = "Juan" },
+                new Movie { Title = "MEN IN BLACK", Actor = "WILL SMITH", Genre = "SAD", Director = "Juan" },
+                new Movie { Title = "GHOST", Actor = "PATRICK SWAYZE", Genre = "COMEDY", Director = "Juan" },
+                new Movie { Title = "FAST AND FURIOUS", Actor = "VIN DIESEL", Genre = "DARK", Director = "Juan" },
+                new Movie { Title = "THE NOTEBOOK", Actor = "RYAN GOSLING", Genre = "ACTION", Director = "Juan" },
+                new Movie { Title = "JAWS", Actor = "GABRIEL UNION", Genre = "ROMANCE", Director = "Juan" },
+                new Movie { Title = "TITANIC", Actor = "LEO DECRAPIO", Genre = "CRYBABY", Director = "Juan" }
             };
 
             return MovieList;
@@ -54,7 +54,7 @@ namespace MovieCapstone
 
             foreach (var movie in movieList)
             {
-                Console.WriteLine($"ID: {movie.ID} Title: {movie.Title} Actor: {movie.Actor} Genre: {movie.Genre} Director: {movie.Director}");
+                Console.WriteLine($"Title: {movie.Title} Actor: {movie.Actor} Genre: {movie.Genre} Director: {movie.Director}");
             }
         }
     }

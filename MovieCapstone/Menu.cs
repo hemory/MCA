@@ -7,7 +7,7 @@ namespace MovieCapstone
         {
             Console.WriteLine();
             Console.WriteLine("----------------------------------------------------------------------");
-            Console.WriteLine("1='Show Movie List', 2='Find a movie', 3='Find movie by actor', 4='Quit'");
+            Console.WriteLine("1='Show Movie List', 2='Find a movie', 3='Find movie by actor', 4='Add Movie'");
             Console.WriteLine("----------------------------------------------------------------------");
             Console.WriteLine();
         }
@@ -29,6 +29,10 @@ namespace MovieCapstone
                     break;
                 case 3:
                     menu.FindMovieByActor(userInput);
+                    menu.MakeAnotherSelection();
+                    break;
+                case 4:
+                    menu.AddMovie();
                     menu.MakeAnotherSelection();
                     break;
                 default:
@@ -72,7 +76,7 @@ namespace MovieCapstone
             else
             {
 
-                Console.WriteLine($"ID: {result.ID} Title: {result.Title} Actor: {result.Actor} Genre: {result.Genre} Director: {result.Director}");
+                Console.WriteLine($" Title: {result.Title} Actor: {result.Actor} Genre: {result.Genre} Director: {result.Director}");
 
             }
         }
@@ -92,13 +96,34 @@ namespace MovieCapstone
             {
                 foreach (var result in actorResult)
                 {
-                    Console.WriteLine($"ID: {result.ID} Title: {result.Title} Actor: {result.Actor} Genre: {result.Genre} Director: {result.Director}");
+                    Console.WriteLine($"Title: {result.Title} Actor: {result.Actor} Genre: {result.Genre} Director: {result.Director}");
                 }
 
             }
 
 
 
+        }
+
+        public void AddMovie()
+        {
+            var movie = new Movie();
+            var movieList = movie.LoadMovies();
+            Console.WriteLine("Enter a title: ");
+            var title = Console.ReadLine().ToUpper();
+            Console.WriteLine("Enter an actor: ");
+           var actor = Console.ReadLine().ToUpper();
+            Console.WriteLine("Enter a genre: ");
+            var genre = Console.ReadLine().ToUpper();
+            Console.WriteLine("Enter a director: ");
+            var director = Console.ReadLine().ToUpper();
+
+            movieList.Add(new Movie { Title = title, Actor = actor, Genre = genre, Director = director });
+
+            foreach (var item in movieList)
+            {
+                Console.WriteLine($"Title: {item.Title} Actor: {item.Actor} Genre: {item.Genre} Director: {item.Director}");
+            }
         }
     }
 }
