@@ -8,4 +8,7 @@
   <ItemGroup>
     <Compile Remove="EmptyClass.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Respositories\MovieList.txt" />
+  </ItemGroup>
 </Project>

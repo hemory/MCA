@@ -15,12 +15,12 @@ namespace MovieCapstone
         public void MakeChoice(int choice)
         {
             var menu = new Menu();
-            var movie = new Movie();
+            var movie = new MovieRepo();
             var userInput = string.Empty;
             switch (choice)
             {
                 case 1:
-                    movie.ShowMovieList();
+                    movie.ReadMovieFile();
                     menu.MakeAnotherSelection();
                     break;
                 case 2:
@@ -32,7 +32,7 @@ namespace MovieCapstone
                     menu.MakeAnotherSelection();
                     break;
                 case 4:
-                    menu.AddMovie();
+                    movie.WriteMovieFile();
                     menu.MakeAnotherSelection();
                     break;
                 default:

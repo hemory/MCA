@@ -7,6 +7,8 @@ namespace MovieCapstone
     {
         static void Main(string[] args)
         {
+
+            var x = new MovieRepo();
             //PRINTS OUT THE MENU
 
             Console.WriteLine("Hello, welcome to the Movie App. Please select an option from the menu below.");
@@ -16,6 +18,7 @@ namespace MovieCapstone
 
             var choice = Convert.ToInt32(Console.ReadLine());
             movieMenu.MakeChoice(choice);
+
         }
 
     }
