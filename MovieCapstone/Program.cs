@@ -15,16 +15,11 @@ namespace MovieCapstone
             movieMenu.ShowMenu();
             var choice = Convert.ToInt32(Console.ReadLine());
             movieMenu.MakeChoice(choice);
-
-
-
-
-
         }
 
-      
     }
 
+    #region MOVIECLASS
     public class Movie
     {
         public int ID { get; set; }
@@ -49,26 +44,21 @@ namespace MovieCapstone
             };
 
             return MovieList;
-                
+
         }
 
         public void ShowMovieList()
         {
             var movies = new Movie();
-           var movieList = movies.LoadMovies();
+            var movieList = movies.LoadMovies();
 
             foreach (var movie in movieList)
             {
                 Console.WriteLine($"ID: {movie.ID} Title: {movie.Title} Actor: {movie.Actor} Genre: {movie.Genre} Director: {movie.Director}");
             }
         }
-
-
-
-
-
-
     }
+    #endregion
 }
 
 

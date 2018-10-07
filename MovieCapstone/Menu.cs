@@ -7,14 +7,10 @@ namespace MovieCapstone
         {
             Console.WriteLine();
             Console.WriteLine("----------------------------------------------------------------------");
-            Console.WriteLine("1='Show Movie List', 2='Find a movie', 3='Find actor/director', 4='Quit'");
+            Console.WriteLine("1='Show Movie List', 2='Find a movie', 3='Find movie by actor', 4='Quit'");
             Console.WriteLine("----------------------------------------------------------------------");
             Console.WriteLine();
         }
-
-
-
-
 
         public void MakeChoice(int choice)
         {
@@ -29,6 +25,10 @@ namespace MovieCapstone
                     break;
                 case 2:
                     menu.FindMovieByTitle(userInput);
+                    menu.MakeAnotherSelection();
+                    break;
+                case 3:
+                    menu.FindMovieByActor(userInput);
                     menu.MakeAnotherSelection();
                     break;
                 default:
@@ -59,70 +59,49 @@ namespace MovieCapstone
         }
 
         public void FindMovieByTitle(string title)
-        {
-            var menu = new Menu();
-            Console.WriteLine("Enter the title of the movie you wish to find?");
+        {           
+            Console.WriteLine("Enter the title of the movie you wish to find: ");
             title = Console.ReadLine();
             var movies = new Movie();
             var movieList = movies.LoadMovies();
-           var result = movieList.Find(x => x.Title.ToUpper() == title.ToUpper());
+            var result = movieList.Find(x => x.Title.ToUpper() == title.ToUpper());
             if (result == null)
             {
                 Console.WriteLine($"Cant find the movie called {title}");
             }
             else
             {
-               
+
                 Console.WriteLine($"ID: {result.ID} Title: {result.Title} Actor: {result.Actor} Genre: {result.Genre} Director: {result.Director}");
+
+            }
+        }
+
+        public void FindMovieByActor(string actor)
+        {
+            Console.WriteLine("Enter an actor you wish to find: ");
+            actor = Console.ReadLine();
+            var movies = new Movie();
+            var movieList = movies.LoadMovies();
+            var actorResult = movieList.FindAll(x => x.Actor.ToUpper() == actor.ToUpper());
+            if (actorResult ==null)
+            {
+                Console.WriteLine($"Cant find the movie called {actor}");
+            }
+            else
+            {
+                foreach (var result in actorResult)
+                {
+                    Console.WriteLine($"ID: {result.ID} Title: {result.Title} Actor: {result.Actor} Genre: {result.Genre} Director: {result.Director}");
+                }
 
             }
 
 
 
         }
+    }
+}
   
 
-         /*   public void AddMovie()
-            {
-                string title;
-                AskforTitle(out title, "Enter the title of the movie: ");
-
-
-                ProductionYear productionYear;
-                AskFor(out productionYear, "When was the movie produced?");
-
-                Movie movie = new Movie(title, productionYear);
-                _movieService.Add(movie);
-
-                string name;
-                AskFor(out name, "Enter the name of the director.");
-                CastOrCrew director = _castOrCrewService.FindBy(name);
-                if (director == null)
-                {
-                    director = NewCastOrCrew(name);
-                }
-
-                _castOrCrewService.AddPeople(director);
-                movie.Director = director;
-
-                bool keepAskingForNewActor = false;
-                do
-                {
-                    AskFor(out name, "Enter the name of an actor: ");
-                    CastOrCrew actor = _castOrCrewService.FindBy(name);
-                    if (actor == null)
-                    {
-                        actor = NewCastOrCrew(name);
-                    }
-                    _castOrCrewService.AddPeople(actor);
-                    movie.AddActor(actor);
-                    Console.Write("Do you want to add a new actor to the movie? (y/n)");
-                    char c = Console.ReadKey().KeyChar;
-                    keepAskingForNewActor = (char.ToLower(c) == 'y');
-                    Console.WriteLine();
-                } while (keepAskingForNewActor); */
-
-            } 
-        }
-    
 
