@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
 namespace MovieCapstone
 {
     public class Menu
@@ -67,8 +71,25 @@ namespace MovieCapstone
             Console.WriteLine("Enter the title of the movie you wish to find: ");
             title = Console.ReadLine();
             var movies = new Movie();
-            var movieList = movies.LoadMovies();
-            var result = movieList.Find(x => x.Title.ToUpper() == title.ToUpper());
+
+            List<Movie> archive = new List<Movie>();
+            List<string> lines = File.ReadAllLines("/Users/hphifer/Desktop/Capstone/MovieList.txt").ToList();
+
+            foreach (var line in lines)
+            {
+                string[] entries = line.Split(',');
+                Movie movie = new Movie
+                {
+                    Genre = entries[0],
+                    Title = entries[1],
+                    Actor = entries[2],
+                    Director = entries[3]
+                };
+                archive.Add(movie);
+            }
+
+
+            var result = archive.Find(x => x.Title.ToUpper() == title.ToUpper());
             if (result == null)
             {
                 Console.WriteLine($"Cant find the movie called {title}");
@@ -86,8 +107,24 @@ namespace MovieCapstone
             Console.WriteLine("Enter an actor you wish to find: ");
             actor = Console.ReadLine();
             var movies = new Movie();
-            var movieList = movies.LoadMovies();
-            var actorResult = movieList.FindAll(x => x.Actor.ToUpper() == actor.ToUpper());
+
+            List<Movie> archive = new List<Movie>();
+            List<string> lines = File.ReadAllLines("/Users/hphifer/Desktop/Capstone/MovieList.txt").ToList();
+
+            foreach (var line in lines)
+            {
+                string[] entries = line.Split(',');
+                Movie movie = new Movie
+                {
+                    Genre = entries[0],
+                    Title = entries[1],
+                    Actor = entries[2],
+                    Director = entries[3]
+                };
+                archive.Add(movie);
+            }
+                     
+            var actorResult = archive.FindAll(x => x.Actor.ToUpper() == actor.ToUpper());
             if (actorResult ==null)
             {
                 Console.WriteLine($"Cant find the movie called {actor}");
@@ -104,27 +141,7 @@ namespace MovieCapstone
 
 
         }
-
-        public void AddMovie()
-        {
-            var movie = new Movie();
-            var movieList = movie.LoadMovies();
-            Console.WriteLine("Enter a title: ");
-            var title = Console.ReadLine().ToUpper();
-            Console.WriteLine("Enter an actor: ");
-           var actor = Console.ReadLine().ToUpper();
-            Console.WriteLine("Enter a genre: ");
-            var genre = Console.ReadLine().ToUpper();
-            Console.WriteLine("Enter a director: ");
-            var director = Console.ReadLine().ToUpper();
-
-            movieList.Add(new Movie { Title = title, Actor = actor, Genre = genre, Director = director });
-
-            foreach (var item in movieList)
-            {
-                Console.WriteLine($"Title: {item.Title} Actor: {item.Actor} Genre: {item.Genre} Director: {item.Director}");
-            }
-        }
+              
     }
 }
   

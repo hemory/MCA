@@ -27,16 +27,9 @@ namespace MovieCapstone
 
             foreach (var movie in archive)
             {
-                Console.WriteLine($"{ movie.Genre } { movie.Title } { movie.Actor } { movie.Director }");
+                Console.WriteLine($"GENRE:{ movie.Genre } TITLE:{ movie.Title } ACTOR:{ movie.Actor } DIRECTOR{ movie.Director }");
             }
 
-
-            //List<string> movies = File.ReadAllLines("/Users/hphifer/Desktop/Capstone/MovieList.txt").ToList();
-
-            //foreach (var movie in movies)
-            //{
-            //    Console.WriteLine(movie);
-            //}
         }
 
         public void WriteMovieFile()

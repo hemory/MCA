@@ -12,15 +12,14 @@ namespace MovieCapstone
             //PRINTS OUT THE MENU
 
             Console.WriteLine("Hello, welcome to the Movie App. Please select an option from the menu below.");
+            Console.Title = "MOVIE APP";
 
-            x.WriteMovieFile();
-            x.ReadMovieFile();
 
-            //var movieMenu = new Menu();
-            //movieMenu.ShowMenu();
+            var movieMenu = new Menu();
+            movieMenu.ShowMenu();
 
-            //var choice = Convert.ToInt32(Console.ReadLine());
-            //movieMenu.MakeChoice(choice);
+            var choice = Convert.ToInt32(Console.ReadLine());
+            movieMenu.MakeChoice(choice);
 
         }
 
