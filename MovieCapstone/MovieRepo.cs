@@ -1,39 +1,88 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace MovieCapstone
 {
     public class MovieRepo
     {
-
-        public async void ReadMovieFile()
+        public void ReadMovieFile()
         {
-            List<string> list = new List<string>();
-            String filename = "/Users/hemory/Desktop/MovieList.txt";
-            Char[] buffer;
+            List<Movie> archive = new List<Movie>();
+            List<string> lines = File.ReadAllLines("/Users/hphifer/Desktop/Capstone/MovieList.txt").ToList();
 
-            using (var sr = new StreamReader(filename))
+            foreach (var line in lines)
             {
-                buffer = new Char[(int)sr.BaseStream.Length];
-                await sr.ReadAsync(buffer, 0, (int)sr.BaseStream.Length);
+                string[] entries = line.Split(',');
+                Movie movie = new Movie
+                {
+                    Genre = entries[0],
+                    Title = entries[1],
+                    Actor = entries[2],
+                    Director = entries[3]
+                };
+                archive.Add(movie);
             }
 
-            Console.WriteLine(new String(buffer));
+            foreach (var movie in archive)
+            {
+                Console.WriteLine($"{ movie.Genre } { movie.Title } { movie.Actor } { movie.Director }");
+            }
+
+
+            //List<string> movies = File.ReadAllLines("/Users/hphifer/Desktop/Capstone/MovieList.txt").ToList();
+
+            //foreach (var movie in movies)
+            //{
+            //    Console.WriteLine(movie);
+            //}
         }
 
         public void WriteMovieFile()
         {
-            Console.WriteLine("Add Movie using the following context: Genre: {INSERT GENRE}  Title: {INSERT TITLE} Actor: {INSERT ACTOR}");
-            var movieEntry = Console.ReadLine().ToUpper();
-            using (StreamWriter writer = new StreamWriter("/Users/hemory/Desktop/MovieList.txt", true))
+            List<Movie> archive = new List<Movie>();
+            List<string> lines = File.ReadAllLines("/Users/hphifer/Desktop/Capstone/MovieList.txt").ToList();
+
+            foreach (var line in lines)
             {
-                writer.WriteLine(movieEntry);
+                string[] entries = line.Split(',');
+                Movie movie = new Movie
+                {
+                    Genre = entries[0],
+                    Title = entries[1],
+                    Actor = entries[2],
+                    Director = entries[3]
+                };
+                archive.Add(movie);
             }
 
+            Console.WriteLine("Enter the Genre of the movie.");
+            var movieGenre = Console.ReadLine();
 
+            Console.WriteLine("Enter the Title of the movie.");
+            var movieTitle = Console.ReadLine();
 
+            Console.WriteLine("Enter the Actor of the movie.");
+            var movieActor = Console.ReadLine();
 
+            Console.WriteLine("Enter the Director of the movie.");
+            var movieDirector = Console.ReadLine();
+
+            archive.Add(new Movie { Genre = movieGenre, Title = movieTitle, Actor = movieActor, Director = movieDirector });
+
+            List<string> output = new List<string>();
+
+            foreach (var movie in archive)
+            {
+                output.Add($"{ movie.Genre },{ movie.Title },{ movie.Actor },{ movie.Director }");
+            }
+
+            Console.WriteLine("Writing to File....");
+
+            File.WriteAllLines("/Users/hphifer/Desktop/Capstone/MovieList.txt", output);
+
+            Console.WriteLine("New movie added");
         }
     }
 }
